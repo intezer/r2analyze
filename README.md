@@ -18,7 +18,7 @@ Execute the plugin via `#!pipe` and save yourself time while reversing. The plug
 After we have submitted the file to Intezer Analyze, we open the file
 with radare2:
 
-```
+```bash
 $ r2 7c82689142a415b0a34553478e445988980f48705735939d6d33c17e4e8dac94
  -- *(ut64*)buffer ought to be illegal
 [0x004028e3]> aaa
@@ -35,11 +35,12 @@ When we run `r2analyze`, it will query Analyze for code reuse. Functions
 that share code already malware will be marked with a gene `flag`. All
 the flags are added to a new flag space called "gene" for easier
 filtering.
-```
+
+```bash
 [0x004028e3]> #!pipe r2analyze
 Analyzing 7c82689142a415b0a34553478e445988980f48705735939d6d33c17e4e8dac94
 Functions found 194.
-[0x004028e3]> fs gene 
+[0x004028e3]> fs gene
 [0x004028e3]> f
 0x00401000 1 gene_malware_ScarCruft_4198400
 0x004013e0 1 gene_malware_ScarCruft_4199392
@@ -48,7 +49,8 @@ Functions found 194.
 ```
 
 Function identified as sharing code with ScarCruft:
-```
+
+```bash
 [0x004028e3]> pdfs @ 4202272
 ;-- gene_malware_ScarCruft_4202272:
 0x00401f4a call dword [sym.imp.KERNEL32.dll_CreateFileA]
